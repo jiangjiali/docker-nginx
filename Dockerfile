@@ -1,13 +1,11 @@
-FROM amd64/alpine:3.20
-
-ENV TZ Asia/Shanghai
+FROM amd64/alpine:3.21
 
 RUN set -x \
     && addgroup nginx \
     && adduser -S -G nginx nginx \
 	&& apk add --no-cache 'su-exec>=0.2' dumb-init libstdc++ tzdata gcc g++ make autoconf automake git linux-headers libunwind libmaxminddb-dev zlib-dev openssl-dev libatomic_ops-dev perl \
-    && cp /usr/share/zoneinfo/${TZ} /etc/localtime \
-    && echo ${TZ} > /etc/timezone \
+    && cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
+    && echo Asia/Shanghai > /etc/timezone \
 	&& mkdir -p /root/temp/ \
     && cd /root/temp/ \
     && git clone https://gitee.com/jiangjiali/ngx_cache_purge \
